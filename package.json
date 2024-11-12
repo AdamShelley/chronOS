@@ -1,5 +1,5 @@
 {
-  "name": "chronos",
+  "name": "tauri-app",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -21,6 +21,6 @@
     "@vitejs/plugin-react": "^4.2.1",
     "typescript": "^5.2.2",
     "vite": "^5.3.1",
-    "@tauri-apps/cli": "^2"
+    "@tauri-apps/cli": "latest"
   }
 }
