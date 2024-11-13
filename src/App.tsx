@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import ProcessCard from "./ProcessCard";
 import { invoke } from "@tauri-apps/api/core";
+import { ThemeProvider } from "./providers/theme-provider";
 
 interface ProcessInfo {
   id: string;
   name: string;
-  running_time: string;
-  memory: number;
+  running_time_formatted: string;
+  memory_in_bytes: number;
 }
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
       const maxMemory = await invoke<ProcessInfo>("max_memory");
       const maxRunningTime = await invoke<ProcessInfo>("max_running_time");
 
+      console.log(maxMemory);
+
       setProcesses(processList);
       setMaxMemory(maxMemory);
       setMaxRunning(maxRunningTime);
@@ -32,24 +35,28 @@ function App() {
   }, []);
 
   return (
-    <main className="container">
-      <h1>Process List</h1>
-      <div className="process-list">
-        {processes.map((process) => (
-          <ProcessCard
-            key={process.id}
-            title={process.name}
-            process={process}
-          />
-        ))}
-      </div>
-      <h1>Max Memory</h1>
-      {maxMemory && <ProcessCard title="Max Memory" process={maxMemory} />}
-      <h1>Max Running Time</h1>
-      {maxRunning && (
-        <ProcessCard title="Max Running Time" process={maxRunning} />
-      )}
-    </main>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <main className="container p-5">
+        <h1 className="">Process List</h1>
+        <div className="flex">
+          {maxMemory && <ProcessCard title="Max Memory" process={maxMemory} />}
+
+          {maxRunning && (
+            <ProcessCard title="Max Running Time" process={maxRunning} />
+          )}
+        </div>
+
+        <div className="flex flex-wrap gap-5">
+          {processes.map((process) => (
+            <ProcessCard
+              key={process.id}
+              title={process.name}
+              process={process}
+            />
+          ))}
+        </div>
+      </main>
+    </ThemeProvider>
   );
 }
 
