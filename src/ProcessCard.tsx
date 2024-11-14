@@ -22,7 +22,7 @@ const ProcessCard: React.FC<ProcessCardProps> = ({
   process,
 }: ProcessCardProps) => {
   return (
-    <Card className="w-[350px] hover:shadow-lg transition-all duration-300 bg-card">
+    <Card className="w-[350px] hover:shadow-sm rounded-sm transition-all duration-300 bg-card">
       <CardHeader>
         <CardTitle className="text-xl font-semibold text-primary">
           {title}

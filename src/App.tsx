@@ -36,17 +36,17 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <main className="container p-5">
+      <main className="p-5 flex flex-col items-center justify-center">
         <h1 className="">Process List</h1>
-        <div className="flex">
+        {/* <div className="flex">
           {maxMemory && <ProcessCard title="Max Memory" process={maxMemory} />}
 
           {maxRunning && (
             <ProcessCard title="Max Running Time" process={maxRunning} />
           )}
-        </div>
+        </div> */}
 
-        <div className="flex flex-wrap gap-5">
+        <div className="mt-5 flex items-center justify-center flex-wrap gap-5">
           {processes.map((process) => (
             <ProcessCard
               key={process.id}
